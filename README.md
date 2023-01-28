@@ -1,6 +1,6 @@
 <h1 align="center">Twitter Helper Craft Extension</h1>
 
-<p align="center">A <a href="https://craft.do/" target="_blank" noreferrer noopener>Craft Docs</a> extension to help you write tweets in limit.</p>
+<p align="center">A <a href="https://craft.do/" target="_blank" noreferrer noopener>Craft Docs</a> extension to help you write tweets in limit</p>
 
 <hr>
 
@@ -61,6 +61,10 @@ A file named `tweet-helper.craftx` will be created.
 
 -   [Twitter Logo](https://github.com/thepushkarp/craft-tweet-helper/blob/main/icon.png) from [Twitter Brand Guidelines](https://about.twitter.com/en/who-we-are/brand-toolkit)
 -   [Craft Extension Guide](https://www.craft.do/s/OhmDYXrBwI2wZS)
+
+## License
+
+[MIT](https://github.com/thepushkarp/craft-tweet-helper/blob/main/LICENSE)
 
 <hr>
 
