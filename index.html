@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div
+            style="
+                width: inherit;
+                height: inherit;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            "
+        >
+            <div style="font-size: 20px; font-weight: bold; font-family: sans-serif">
+                Characters left
+            </div>
+            <svg width="100" height="100">
+                <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    stroke="#1DA1F2"
+                    stroke-width="3"
+                    fill="none"
+                    stroke-dasharray="251.3274"
+                    stroke-dashoffset="251.3274"
+                    id="circle"
+                    transform="rotate(-90 50 50)"
+                />
+                <text
+                    x="50%"
+                    y="50%"
+                    text-anchor="middle"
+                    alignment-baseline="middle"
+                    font-size="20"
+                    font-weight="bold"
+                    fill="#1DA1F2"
+                    id="count"
+                    font-family="sans-serif"
+                >
+                    0
+                </text>
+            </svg>
+            <div
+                style="
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    margin: 10px;
+                    font-size: 12px;
+                    font-family: sans-serif;
+                "
+            >
+                Tweet Helper made with ❤️ by
+                <span
+                    style="color: #1da1f2; cursor: pointer"
+                    onclick="openTwitterProfile()"
+                >
+                    @thepushkarp
+                </span>
+            </div>
+        </div>
+
+        <script>
+            setInterval(async () => {
+                craft.env.setListener((env) => {
+                    document.body.style.backgroundColor =
+                        env.colorScheme === 'light' ? 'white' : '#202020';
+                    document.body.style.color =
+                        env.colorScheme === 'light' ? '#202020' : 'white';
+                });
+
+                const result = await craft.editorApi.getTextSelection();
+
+                if (result.status !== 'success') {
+                    throw new Error(result.message);
+                }
+
+                const selectedText = result.data;
+                const tweetLength = selectedText.length;
+
+                const circle = document.getElementById('circle');
+                const count = document.getElementById('count');
+
+                const MAX_TWEET_LENGTH = 280;
+                const CIRCUMFERENCE = 251.3274;
+
+                const numCharsShortOfMaxLength = MAX_TWEET_LENGTH - tweetLength;
+                var offset;
+
+                count.innerHTML = numCharsShortOfMaxLength;
+
+                if (MAX_TWEET_LENGTH - tweetLength <= 0) {
+                    circle.style.stroke = '#F42121';
+                    count.style.fill = '#F42121';
+                    circle.style['stroke-width'] = '4';
+                } else if (MAX_TWEET_LENGTH - tweetLength <= 20) {
+                    circle.style.stroke = '#FFD400';
+                    count.style.fill = '#FFD400';
+                    circle.style['stroke-width'] = '4';
+                } else {
+                    circle.style.stroke = '#1DA1F2';
+                    count.style.fill = '#1DA1F2';
+                    circle.style['stroke-width'] = '3';
+                }
+
+                if (numCharsShortOfMaxLength < 0) {
+                    offset = 0;
+                } else {
+                    offset =
+                        CIRCUMFERENCE -
+                        (tweetLength / MAX_TWEET_LENGTH) * CIRCUMFERENCE;
+                }
+
+                circle.style.strokeDashoffset = offset;
+            }, 10);
+
+            async function openTwitterProfile() {
+                const result = await craft.editorApi.openURL(
+                    'https://twitter.com/thepushkarp'
+                );
+
+                if (result.status !== 'success') {
+                    throw new Error(result.mess);
+                }
+            }
+        </script>
+    </body>
+</html>

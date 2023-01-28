@@ -1,0 +1,10 @@
+{
+    "id": "do.craft.tweet-helper",
+    "name": "Tweet Helper",
+    "fileName": "tweet-helper",
+    "author": "Pushkar Patel",
+    "author-email": "thepushkarp@gmail.com",
+    "description": "Helps you write better tweets",
+    "api": "0.1.0",
+    "main": "index.html"
+}
